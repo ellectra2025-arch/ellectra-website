@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ellectra Admin Panel</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -31,78 +30,67 @@
       background-color: rgba(255,255,255,0.9);
       background-blend-mode: lighten;
     }
-
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
+    .no-scrollbar::-webkit-scrollbar { display:none; }
+    .no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
     .navBtn.active {
-      color: #E02626;
-      transform: scale(1.12);
-      background: rgba(224,38,38,0.12);
-      border-radius: 10px;
-      padding: 6px 12px;
-      transition: 0.25s;
+      color:#E02626;
+      transform:scale(1.12);
+      background:rgba(224,38,38,0.12);
+      border-radius:10px;
+      padding:6px 12px;
+      transition:0.25s;
     }
   </style>
 </head>
 
 <body class="text-brandDark min-h-screen overflow-hidden">
 
-  <!-- Top Header -->
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="fixed inset-0 bg-white flex flex-col items-center justify-center gap-3">
+  <div class="text-lg font-semibold text-brandDark">Ellectra Admin</div>
+  <button id="loginBtn" class="px-4 py-2 bg-brandRed text-white rounded shadow">Admin Login</button>
+</div>
+
+<!-- MAIN PANEL (HIDDEN INITIALLY) -->
+<div id="adminPanel" class="hidden">
+
+  <!-- HEADER -->
   <div class="fixed top-0 left-0 right-0 p-4 bg-white shadow z-50">
     <div class="text-lg font-semibold text-brandRed">Admin Panel</div>
     <div class="text-xs text-gray-700">Welcome, Administrator</div>
   </div>
 
-  <!-- Wrapper -->
+  <!-- WRAPPER -->
   <div id="adminWrapper" class="fixed top-14 bottom-14 left-0 right-0 overflow-hidden">
     <div id="adminPages" class="flex w-[700%] h-full transition-transform duration-300 ease-out">
-      
+
       <!-- PAGE 1 - Add Item -->
       <div id="page-add-item" class="w-full h-full overflow-y-auto no-scrollbar pb-28 p-4 space-y-4">
         <div class="text-lg font-semibold text-brandDark">Add Item</div>
-
         <input id="itemName" class="border p-2 w-full rounded" placeholder="Item Name">
         <input id="itemCode" class="border p-2 w-full rounded" placeholder="Item Code">
         <input id="itemCategory" class="border p-2 w-full rounded" placeholder="Category">
         <textarea id="itemDesc" class="border p-2 w-full rounded" placeholder="Description"></textarea>
-
         <input id="purchasePrice" class="border p-2 w-full rounded" placeholder="Purchase Price (INR)">
         <input id="sellingPrice" class="border p-2 w-full rounded" placeholder="Selling Price (INR)">
         <input id="actualPrice" class="border p-2 w-full rounded" placeholder="Actual Price (INR)">
         <input id="quantity" class="border p-2 w-full rounded" placeholder="Quantity Available">
         <input id="minStock" class="border p-2 w-full rounded" placeholder="Minimum Stock Alert">
 
-        <button id="suggestBtn" class="w-full py-2 bg-brandRed text-white rounded shadow">
-          Suggest via AI
-        </button>
-
+        <button id="suggestBtn" class="w-full py-2 bg-brandRed text-white rounded shadow">Suggest via AI</button>
         <div id="suggestedImages" class="flex flex-wrap gap-2 pt-2"></div>
-
-        <button id="uploadPickedBtn" class="w-full py-2 bg-brandYellow text-brandDark rounded shadow">
-          Upload Selected Images
-        </button>
-
-        <button id="saveItemBtn" class="w-full py-2 bg-brandRed text-white rounded shadow">
-          Save Item
-        </button>
+        <button id="uploadPickedBtn" class="w-full py-2 bg-brandYellow text-brandDark rounded shadow">Upload Selected Images</button>
+        <button id="saveItemBtn" class="w-full py-2 bg-brandRed text-white rounded shadow">Save Item</button>
       </div>
+
       <!-- PAGE 2 - Billing (Customer) -->
       <div id="page-billing-customer" class="w-full h-full overflow-y-auto no-scrollbar pb-28 p-4 space-y-3">
         <div class="text-lg font-semibold text-brandDark">Billing (Customer)</div>
         <input id="billCustSearch" class="border p-2 w-full rounded" placeholder="Search item">
         <div id="billCustList" class="space-y-2"></div>
-
         <div class="mt-3 p-3 bg-white shadow rounded space-y-1">
           <div id="billCustTotal" class="text-lg font-semibold">Total: 0 INR</div>
-          <button id="billCustCheckout" class="w-full py-2 bg-brandRed text-white rounded shadow">
-            Checkout
-          </button>
+          <button id="billCustCheckout" class="w-full py-2 bg-brandRed text-white rounded shadow">Checkout</button>
         </div>
       </div>
 
@@ -111,15 +99,11 @@
         <div class="text-lg font-semibold text-brandDark">Billing (Owner)</div>
         <input id="billOwnerSearch" class="border p-2 w-full rounded" placeholder="Search item">
         <div id="billOwnerList" class="space-y-2"></div>
-
         <div class="mt-3 p-3 bg-white shadow rounded space-y-1">
           <div id="billOwnerTotal" class="text-lg font-semibold">Total: 0 INR</div>
-          <button id="billOwnerCheckout" class="w-full py-2 bg-brandRed text-white rounded shadow">
-            Checkout
-          </button>
+          <button id="billOwnerCheckout" class="w-full py-2 bg-brandRed text-white rounded shadow">Checkout</button>
         </div>
       </div>
-
       <!-- PAGE 4 - Stock -->
       <div id="page-stock" class="w-full h-full overflow-y-auto no-scrollbar pb-28 p-4 space-y-3">
         <div class="text-lg font-semibold text-brandDark">Stock Details</div>
@@ -147,413 +131,325 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation -->
+  <!-- NAV -->
   <div class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-xl flex justify-around py-2 z-50">
-    <button data-p="0" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">Add Item</button>
-    <button data-p="1" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">Billing Cust</button>
-    <button data-p="2" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">Billing Owner</button>
-    <button data-p="3" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">Stock</button>
-    <button data-p="4" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">History</button>
-    <button data-p="5" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">Money</button>
-    <button data-p="6" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-700">Profit</button>
+    <button data-p="0" class="navBtn text-xs">Add Item</button>
+    <button data-p="1" class="navBtn text-xs">Billing Cust</button>
+    <button data-p="2" class="navBtn text-xs">Billing Owner</button>
+    <button data-p="3" class="navBtn text-xs">Stock</button>
+    <button data-p="4" class="navBtn text-xs">History</button>
+    <button data-p="5" class="navBtn text-xs">Money</button>
+    <button data-p="6" class="navBtn text-xs">Profit</button>
   </div>
+</div>
 
-  <script>
-    const navBtns = document.querySelectorAll(".navBtn");
-    const adminPages = document.getElementById("adminPages");
-    let currentPage = 0;
+<script>
+  const navBtns = document.querySelectorAll(".navBtn");
+  const adminPages = document.getElementById("adminPages");
+  let currentPage = 0;
 
-    function setPage(i){
-      currentPage = i;
-      adminPages.style.transform = `translateX(-${i*100}%)`;
-      navBtns.forEach(btn => btn.classList.remove("active"));
-      navBtns[i].classList.add("active");
-    }
-
-    navBtns.forEach(btn => btn.onclick = () => setPage(+btn.dataset.p));
-
-    setPage(0);
-  </script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  import { getDatabase, ref, set, push, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyB1OpSI-breyPxE4mdBCOyQDvNm-QFNl-4",
-    authDomain: "ellectra-main-web.firebaseapp.com",
-    databaseURL: "https://ellectra-main-web-default-rtdb.firebaseio.com",
-    projectId: "ellectra-main-web",
-    storageBucket: "ellectra-main-web.firebasestorage.app",
-    messagingSenderId: "287792042028",
-    appId: "1:287792042028:web:5bf3108239ef89288bc189"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-  const db = getDatabase();
-  const provider = new GoogleAuthProvider();
-
-  const ADMIN_UID = "BTKE8zR1MqMCeK5dLycxPBj8TnG2";
-  const GEMINI_API_KEY = "AIzaSyAuXKGvCRFkgZDs3C1fMVhCVO1Ohrz64r0";
-  const CLOUD_NAME = "dauirnttc";
-  const UPLOAD_PRESET = "ELLECTRA";
-  const FOLDER = "PRODUCTS";
-  const CURRENCY = "INR";
-
-  function lock() {
-    document.body.innerHTML = `
-      <div class="fixed inset-0 flex items-center justify-center bg-white">
-        <button id="loginBtn" class="px-4 py-2 bg-brandRed text-white rounded">Admin Login</button>
-      </div>
-    `;
-    document.getElementById("loginBtn").onclick = () => signInWithPopup(auth, provider);
+  function setPage(i){
+    currentPage = i;
+    adminPages.style.transform = `translateX(-${i*100}%)`;
+    navBtns.forEach(btn => btn.classList.remove("active"));
+    navBtns[i].classList.add("active");
   }
 
-  onAuthStateChanged(auth, user => {
-    if (!user) return lock();
-    if (user.uid !== ADMIN_UID) {
-      document.body.innerHTML = `
-        <div class="fixed inset-0 flex items-center justify-center text-red-600 text-lg">ACCESS DENIED</div>
-      `;
-      return;
-    }
-  });
+  navBtns.forEach(btn => btn.onclick = () => setPage(+btn.dataset.p));
+  setPage(0);
+</script>
 
+<!-- LOGIN + AUTH -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { getDatabase, ref, push, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB1OpSI-breyPxE4mdBCOyQDvNm-QFNl-4",
+  authDomain: "ellectra-main-web.firebaseapp.com",
+  databaseURL: "https://ellectra-main-web-default-rtdb.firebaseio.com",
+  projectId: "ellectra-main-web",
+  storageBucket: "ellectra-main-web.firebasestorage.app",
+  messagingSenderId: "287792042028",
+  appId: "1:287792042028:web:5bf3108239ef89288bc189"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getDatabase();
+const provider = new GoogleAuthProvider();
+
+const ADMIN_UID = "BTKE8zR1MqMCeK5dLycxPBj8TnG2";
+const GEMINI_API_KEY = "AIzaSyAuXKGvCRFkgZDs3C1fMVhCVO1Ohrz64r0";
+const CLOUD_NAME = "dauirnttc";
+const UPLOAD_PRESET = "ELLECTRA";
+const FOLDER = "PRODUCTS";
+const CURRENCY = "INR";
+
+loginBtn.onclick = () => signInWithPopup(auth, provider);
+
+onAuthStateChanged(auth, user => {
+  if (!user) return;
+
+  if (user.uid !== ADMIN_UID) {
+    loginScreen.innerHTML = `<div class="text-red-600 text-lg">ACCESS DENIED</div>`;
+    return;
+  }
+
+  loginScreen.classList.add("hidden");
+  adminPanel.classList.remove("hidden");
+});
+
+/* ==== AI SUGGEST ==== */
 async function suggestImages(name) {
   const prompt = `
     Return exactly 10 DIRECT HTTPS product image URLs for: "${name}".
     Must be valid JSON array of 10 strings. No markdown. No explanations.
   `;
-
-  const payload = {
-    contents: [
-      {
-        parts: [{ text: prompt }]
-      }
-    ]
-  };
-
+  const payload = { contents:[{ parts:[{ text:prompt }]}] };
   let res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta2/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    }
+    { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify(payload) }
   );
-
   const data = await res.json();
   const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
-
-  let urls = [];
-  try {
-    urls = JSON.parse(raw);
-  } catch (e) {
-    urls = raw.match(/https?:\/\/\S+/g) || [];
-  }
-
-  return urls.slice(0, 10);
+  let urls=[];
+  try{ urls = JSON.parse(raw) } catch(e){ urls = raw.match(/https?:\/\/\S+/g)||[] }
+  return urls.slice(0,10);
 }
 
-  let picked = [];
+let picked=[];
 
-  document.getElementById("suggestBtn").onclick = async () => {
-    const name = itemName.value.trim();
-    if (!name) return;
-    picked = [];
-    suggestedImages.innerHTML = "Loading...";
-    const urls = await suggestImages(name);
-    suggestedImages.innerHTML = "";
-
-    urls.forEach(url => {
-      const d = document.createElement("div");
-      d.className = "relative w-24 h-24 border rounded overflow-hidden cursor-pointer";
-      d.innerHTML = `<img src="${url}" class="w-full h-full object-cover">`;
-      d.onclick = () => {
-        if (picked.includes(url)) {
-          picked = picked.filter(x => x !== url);
-          d.classList.remove("ring-4", "ring-brandRed");
-        } else {
-          picked.push(url);
-          d.classList.add("ring-4", "ring-brandRed");
-        }
-      };
-      suggestedImages.appendChild(d);
-    });
-  };
-
-  async function uploadPicked() {
-    const up = [];
-    for (let url of picked) {
-      const blob = await fetch(url).then(r => r.blob());
-      const form = new FormData();
-      form.append("file", blob, "img.jpg");
-      form.append("upload_preset", UPLOAD_PRESET);
-      form.append("folder", FOLDER);
-
-      const r = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-        method: "POST",
-        body: form
-      });
-      const d = await r.json();
-      up.push(d.secure_url);
+suggestBtn.onclick = async () => {
+  const name = itemName.value.trim();
+  if(!name) return;
+  picked=[];
+  suggestedImages.innerHTML="Loading...";
+  const urls = await suggestImages(name);
+  suggestedImages.innerHTML="";
+  urls.forEach(url=>{
+    const d=document.createElement("div");
+    d.className="relative w-24 h-24 border rounded overflow-hidden cursor-pointer";
+    d.innerHTML=`<img src="${url}" class="w-full h-full object-cover">`;
+    d.onclick=()=>{
+      if(picked.includes(url)){
+        picked=picked.filter(x=>x!==url);
+        d.classList.remove("ring-4","ring-brandRed");
+      } else {
+        picked.push(url);
+        d.classList.add("ring-4","ring-brandRed");
+      }
     }
-    return up;
-  }
+    suggestedImages.appendChild(d);
+  });
+};
 
-  uploadPickedBtn.onclick = async () => {
-    const urls = await uploadPicked();
-    uploadPickedBtn.dataset.urls = JSON.stringify(urls);
-  };
-
-  saveItemBtn.onclick = async () => {
-    const name = itemName.value.trim();
-    const code = itemCode.value.trim();
-    const cat = itemCategory.value.trim();
-    const desc = itemDesc.value.trim();
-    const purchase = purchasePrice.value.trim();
-    const sell = sellingPrice.value.trim();
-    const actual = actualPrice.value.trim();
-    const qty = quantity.value.trim();
-    const minS = minStock.value.trim();
-    const imgs = JSON.parse(uploadPickedBtn.dataset.urls || "[]");
-
-    await set(push(ref(db, "inventory/items")), {
-      name,
-      code,
-      category: cat,
-      description: desc,
-      purchasePrice: purchase,
-      sellingPrice: sell,
-      actualPrice: actual,
-      quantity: qty,
-      minStock: minS,
-      currency: CURRENCY,
-      images: imgs,
-      createdAt: Date.now()
+async function uploadPicked(){
+  const up=[];
+  for(let url of picked){
+    const blob=await fetch(url).then(r=>r.blob());
+    const form=new FormData();
+    form.append("file",blob,"img.jpg");
+    form.append("upload_preset",UPLOAD_PRESET);
+    form.append("folder",FOLDER);
+    const r=await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,{
+      method:"POST", body:form
     });
+    const d=await r.json();
+    up.push(d.secure_url);
+  }
+  return up;
+}
 
-    itemName.value = "";
-    itemCode.value = "";
-    itemCategory.value = "";
-    itemDesc.value = "";
-    purchasePrice.value = "";
-    sellingPrice.value = "";
-    actualPrice.value = "";
-    quantity.value = "";
-    minStock.value = "";
-    suggestedImages.innerHTML = "";
-    uploadPickedBtn.removeAttribute("data-urls");
-  };
+uploadPickedBtn.onclick = async () => {
+  const urls = await uploadPicked();
+  uploadPickedBtn.dataset.urls = JSON.stringify(urls);
+};
+
+saveItemBtn.onclick = async () => {
+  const name=itemName.value.trim();
+  const code=itemCode.value.trim();
+  const cat=itemCategory.value.trim();
+  const desc=itemDesc.value.trim();
+  const purchase=purchasePrice.value.trim();
+  const sell=sellingPrice.value.trim();
+  const actual=actualPrice.value.trim();
+  const qty=quantity.value.trim();
+  const minS=minStock.value.trim();
+  const imgs=JSON.parse(uploadPickedBtn.dataset.urls||"[]");
+
+  await set(push(ref(db,"inventory/items")),{
+    name,code,category:cat,description:desc,purchasePrice:purchase,
+    sellingPrice:sell,actualPrice:actual,quantity:qty,minStock:minS,
+    currency:CURRENCY,images:imgs,createdAt:Date.now()
+  });
+
+  itemName.value=itemCode.value=itemCategory.value=itemDesc.value=
+  purchasePrice.value=sellingPrice.value=actualPrice.value=quantity.value=minStock.value="";
+  suggestedImages.innerHTML="";
+  uploadPickedBtn.removeAttribute("data-urls");
+};
+
+/* ==== BILLING CUSTOMER ==== */
+let billItems=[];
+billCustSearch.oninput=e=>{
+  const q=e.target.value.toLowerCase();
+  get(ref(db,"inventory/items")).then(s=>{
+    const d=s.val()||{};
+    billCustList.innerHTML="";
+    Object.values(d).forEach(v=>{
+      if(v.name.toLowerCase().includes(q)){
+        const b=document.createElement("div");
+        b.className="p-2 bg-white shadow rounded cursor-pointer";
+        b.innerHTML=`${v.name} - ${v.sellingPrice} ${CURRENCY}`;
+        b.onclick=()=>{ billItems.push(v); refreshBillCust(); }
+        billCustList.appendChild(b);
+      }
+    });
+  });
+};
+
+function refreshBillCust(){
+  let t=0; billCustList.innerHTML="";
+  billItems.forEach(v=>{
+    t+=+v.sellingPrice;
+    const e=document.createElement("div");
+    e.className="p-2 bg-white shadow rounded flex justify-between";
+    e.innerHTML=`<span>${v.name}</span><span>${v.sellingPrice} ${CURRENCY}</span>`;
+    billCustList.appendChild(e);
+  });
+  billCustTotal.innerText=`Total: ${t} ${CURRENCY}`;
+}
+
+billCustCheckout.onclick=()=>{
+  const total=billItems.reduce((a,b)=>a+ +b.sellingPrice,0);
+  set(push(ref(db,"billing/history")),{
+    type:"customer",items:billItems,total,currency:CURRENCY,createdAt:Date.now()
+  });
+  billItems=[]; refreshBillCust();
+};
+
+/* ==== BILLING OWNER ==== */
+let ownerItems=[];
+billOwnerSearch.oninput=e=>{
+  const q=e.target.value.toLowerCase();
+  get(ref(db,"inventory/items")).then(s=>{
+    const d=s.val()||{};
+    billOwnerList.innerHTML="";
+    Object.values(d).forEach(v=>{
+      if(v.name.toLowerCase().includes(q)){
+        const b=document.createElement("div");
+        b.className="p-2 bg-white shadow rounded cursor-pointer";
+        b.innerHTML=`${v.name} - ${v.purchasePrice} ${CURRENCY}`;
+        b.onclick=()=>{ ownerItems.push(v); refreshBillOwner(); }
+        billOwnerList.appendChild(b);
+      }
+    });
+  });
+};
+
+function refreshBillOwner(){
+  let t=0; ownerList.innerHTML="";
+  ownerItems.forEach(v=>{
+    t+=+v.purchasePrice;
+    const e=document.createElement("div");
+    e.className="p-2 bg-white shadow rounded flex justify-between";
+    e.innerHTML=`<span>${v.name}</span><span>${v.purchasePrice} ${CURRENCY}</span>`;
+    ownerList.appendChild(e);
+  });
+  ownerTotal.innerText=`Total: ${t} ${CURRENCY}`;
+}
+
+billOwnerCheckout.onclick=()=>{
+  const total=ownerItems.reduce((a,b)=>a+ +b.purchasePrice,0);
+  set(push(ref(db,"billing/history")),{
+    type:"owner",items:ownerItems,total,currency:CURRENCY,createdAt:Date.now()
+  });
+  ownerItems=[]; refreshBillOwner();
+};
+
+/* ==== STOCK ==== */
+onValue(ref(db,"inventory/items"),snap=>{
+  const d=snap.val()||{};
+  stockContainer.innerHTML="";
+  Object.values(d).forEach(v=>{
+    const e=document.createElement("div");
+    e.className="p-3 bg-white rounded shadow";
+    e.innerHTML=`<div class="font-semibold">${v.name}</div>
+    <div class="text-xs text-gray-600">${v.category||""}</div>
+    <div class="text-sm pt-1">Qty: ${v.quantity} | Min: ${v.minStock}</div>`;
+    stockContainer.appendChild(e);
+  });
+});
+
+/* ==== HISTORY ==== */
+onValue(ref(db,"billing/history"),snap=>{
+  const d=snap.val()||{};
+  historyContainer.innerHTML="";
+  Object.values(d).reverse().forEach(v=>{
+    const e=document.createElement("div");
+    e.className="p-3 bg-white rounded shadow";
+    e.innerHTML=`<div class="font-semibold">${v.type.toUpperCase()} BILL</div>
+    <div class="text-xs text-gray-600">${new Date(v.createdAt).toLocaleString()}</div>
+    <div class="pt-1 font-semibold">Total: ${v.total} ${CURRENCY}</div>`;
+    historyContainer.appendChild(e);
+  });
+});
+
+/* ==== MONEY ==== */
+onValue(ref(db,"billing/history"),snap=>{
+  const d=snap.val()||{};
+  let income=0,expense=0;
+  Object.values(d).forEach(v=>{
+    if(v.type==="customer") income+=v.total;
+    if(v.type==="owner") expense+=v.total;
+  });
+  moneyContainer.innerHTML=`
+    <div class='p-3 bg-white rounded shadow mb-2'>Income: ${income} ${CURRENCY}</div>
+    <div class='p-3 bg-white rounded shadow mb-2'>Expense: ${expense} ${CURRENCY}</div>
+    <div class='p-3 bg-white rounded shadow mb-2'>Balance: ${income-expense} ${CURRENCY}</div>
+  `;
+});
+
+/* ==== PROFIT ==== */
+onValue(ref(db,"inventory/items"),snap=>{
+  const items=snap.val()||{};
+  onValue(ref(db,"billing/history"),h=>{
+    const hist=h.val()||{};
+    let profit=0;
+    Object.values(hist).forEach(v=>{
+      if(v.type==="customer"){
+        v.items.forEach(p=>{
+          const it=Object.values(items).find(x=>x.name===p.name);
+          if(it) profit += ((+it.sellingPrice)-(+it.purchasePrice));
+        });
+      }
+    });
+    profitContainer.innerHTML=`<div class='p-3 bg-white rounded shadow font-semibold'>${profit} ${CURRENCY}</div>`;
+  });
+});
 </script>
-<script type="module">
-  import { get, onValue, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-  let billItems = [];
-  const billList = billCustList;
-  const billTotal = billCustTotal;
-
-  billCustSearch.oninput = e => {
-    const q = e.target.value.toLowerCase();
-    get(ref(db, "inventory/items")).then(s => {
-      const d = s.val() || {};
-      billList.innerHTML = "";
-      Object.values(d).forEach(v => {
-        if (v.name.toLowerCase().includes(q)) {
-          const b = document.createElement("div");
-          b.className = "p-2 bg-white shadow rounded cursor-pointer";
-          b.innerHTML = `${v.name} - ${v.sellingPrice} ${CURRENCY}`;
-          b.onclick = () => {
-            billItems.push(v);
-            refreshBill();
-          };
-          billList.appendChild(b);
-        }
-      });
-    });
-  };
-
-  function refreshBill() {
-    let t = 0;
-    billList.innerHTML = "";
-    billItems.forEach(v => {
-      t += +v.sellingPrice;
-      const e = document.createElement("div");
-      e.className = "p-2 bg-white shadow rounded flex justify-between";
-      e.innerHTML = `
-        <span>${v.name}</span>
-        <span>${v.sellingPrice} ${CURRENCY}</span>
-      `;
-      billList.appendChild(e);
-    });
-    billTotal.innerText = `Total: ${t} ${CURRENCY}`;
-  }
-
-  billCustCheckout.onclick = () => {
-    const total = billItems.reduce((a, b) => a + +b.sellingPrice, 0);
-    set(push(ref(db, "billing/history")), {
-      type: "customer",
-      items: billItems,
-      total,
-      currency: CURRENCY,
-      createdAt: Date.now()
-    });
-    billItems = [];
-    refreshBill();
-  };
-
-  let ownerItems = [];
-  const ownerList = billOwnerList;
-  const ownerTotal = billOwnerTotal;
-
-  billOwnerSearch.oninput = e => {
-    const q = e.target.value.toLowerCase();
-    get(ref(db, "inventory/items")).then(s => {
-      const d = s.val() || {};
-      ownerList.innerHTML = "";
-      Object.values(d).forEach(v => {
-        if (v.name.toLowerCase().includes(q)) {
-          const b = document.createElement("div");
-          b.className = "p-2 bg-white shadow rounded cursor-pointer";
-          b.innerHTML = `${v.name} - ${v.purchasePrice} ${CURRENCY}`;
-          b.onclick = () => {
-            ownerItems.push(v);
-            refreshOwner();
-          };
-          ownerList.appendChild(b);
-        }
-      });
-    });
-  };
-
-  function refreshOwner() {
-    let t = 0;
-    ownerList.innerHTML = "";
-    ownerItems.forEach(v => {
-      t += +v.purchasePrice;
-      const e = document.createElement("div");
-      e.className = "p-2 bg-white shadow rounded flex justify-between";
-      e.innerHTML = `
-        <span>${v.name}</span>
-        <span>${v.purchasePrice} ${CURRENCY}</span>
-      `;
-      ownerList.appendChild(e);
-    });
-    ownerTotal.innerText = `Total: ${t} ${CURRENCY}`;
-  }
-
-  billOwnerCheckout.onclick = () => {
-    const total = ownerItems.reduce((a, b) => a + +b.purchasePrice, 0);
-    set(push(ref(db, "billing/history")), {
-      type: "owner",
-      items: ownerItems,
-      total,
-      currency: CURRENCY,
-      createdAt: Date.now()
-    });
-    ownerItems = [];
-    refreshOwner();
-  };
-
-  onValue(ref(db, "inventory/items"), snap => {
-    const d = snap.val() || {};
-    stockContainer.innerHTML = "";
-    Object.values(d).forEach(v => {
-      const e = document.createElement("div");
-      e.className = "p-3 bg-white rounded shadow";
-      e.innerHTML = `
-        <div class="font-semibold">${v.name}</div>
-        <div class="text-xs text-gray-600">${v.category || ""}</div>
-        <div class="text-sm pt-1">Qty: ${v.quantity} | Min: ${v.minStock}</div>
-      `;
-      stockContainer.appendChild(e);
-    });
-  });
-
-  onValue(ref(db, "billing/history"), snap => {
-    const d = snap.val() || {};
-    historyContainer.innerHTML = "";
-    Object.values(d).reverse().forEach(v => {
-      const e = document.createElement("div");
-      e.className = "p-3 bg-white rounded shadow";
-      e.innerHTML = `
-        <div class="font-semibold">${v.type.toUpperCase()} BILL</div>
-        <div class="text-xs text-gray-600">${new Date(v.createdAt).toLocaleString()}</div>
-        <div class="pt-1 font-semibold">Total: ${v.total} ${CURRENCY}</div>
-      `;
-      historyContainer.appendChild(e);
-    });
-  });
-
-  onValue(ref(db, "billing/history"), snap => {
-    const d = snap.val() || {};
-    let income = 0;
-    let expense = 0;
-
-    Object.values(d).forEach(v => {
-      if (v.type === "customer") income += v.total;
-      if (v.type === "owner") expense += v.total;
-    });
-
-    moneyContainer.innerHTML = `
-      <div class='p-3 bg-white rounded shadow mb-2'>Income: ${income} ${CURRENCY}</div>
-      <div class='p-3 bg-white rounded shadow mb-2'>Expense: ${expense} ${CURRENCY}</div>
-      <div class='p-3 bg-white rounded shadow mb-2'>Balance: ${income - expense} ${CURRENCY}</div>
-    `;
-  });
-
-  onValue(ref(db, "inventory/items"), snap => {
-    const items = snap.val() || {};
-    onValue(ref(db, "billing/history"), h => {
-      const hist = h.val() || {};
-      let profit = 0;
-
-      Object.values(hist).forEach(v => {
-        if (v.type === "customer") {
-          v.items.forEach(p => {
-            const it = Object.values(items).find(x => x.name === p.name);
-            if (it) {
-              profit += ((+it.sellingPrice) - (+it.purchasePrice));
-            }
-          });
-        }
-      });
-
-      profitContainer.innerHTML = `
-        <div class='p-3 bg-white rounded shadow font-semibold'>${profit} ${CURRENCY}</div>
-      `;
-    });
-  });
-</script>
+<!-- SWIPE -->
 <script>
-  let touchStartX = 0;
-  let touchMoveX = 0;
-  const totalPages = 7;
-
-  function handleTouchStart(e) {
-    touchStartX = e.touches[0].clientX;
-  }
-
-  function handleTouchMove(e) {
-    touchMoveX = e.touches[0].clientX;
-  }
-
-  function handleTouchEnd() {
-    const diff = touchMoveX - touchStartX;
-
-    if (Math.abs(diff) > 50) {
-      if (diff < 0 && currentPage < totalPages - 1) currentPage++;
-      if (diff > 0 && currentPage > 0) currentPage--;
-      adminPages.style.transform = `translateX(-${currentPage * 100}%)`;
-      navBtns.forEach(b => b.classList.remove("active"));
+  let touchStartX=0, touchMoveX=0;
+  const totalPages=7;
+  function handleTouchStart(e){ touchStartX=e.touches[0].clientX; }
+  function handleTouchMove(e){ touchMoveX=e.touches[0].clientX; }
+  function handleTouchEnd(){
+    const diff=touchMoveX-touchStartX;
+    if(Math.abs(diff)>50){
+      if(diff<0 && currentPage<totalPages-1) currentPage++;
+      if(diff>0 && currentPage>0) currentPage--;
+      adminPages.style.transform=`translateX(-${currentPage*100}%)`;
+      navBtns.forEach(b=>b.classList.remove("active"));
       navBtns[currentPage].classList.add("active");
     }
   }
-
-  adminPages.addEventListener("touchstart", handleTouchStart);
-  adminPages.addEventListener("touchmove", handleTouchMove);
-  adminPages.addEventListener("touchend", handleTouchEnd);
+  adminPages.addEventListener("touchstart",handleTouchStart);
+  adminPages.addEventListener("touchmove",handleTouchMove);
+  adminPages.addEventListener("touchend",handleTouchEnd);
 </script>
 
 </body>
