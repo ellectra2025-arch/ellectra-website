@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ellectra</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brandRed: '#E02626',
+        brandYellow: '#F2C300',
+        brandDark: '#222222',
+        brandLight: '#F7F7F7'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+body {
+  background-image: url('https://res.cloudinary.com/dfcceqba3/image/upload/v1768751916/58ea0e8c-876b-4d10-8409-0467943fd187_mpxtlr.jpg');
+  background-repeat: repeat;
+  background-size: 80px;
+  background-color: rgba(255,255,255,0.9);
+  background-blend-mode: lighten;
+}
+
+.drawer {
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1), opacity 0.2s;
+}
+
+.backdrop {
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.navBtn.active {
+  color: #E02626;
+  transform: scale(1.10);
+  background: rgba(224,38,38,0.12);
+  border-radius: 12px;
+  padding: 4px 10px;
+  transition: 0.25s;
+}
+</style>
+</head>
+
+<body class="text-brandDark min-h-screen overflow-hidden">
+
+<div class="flex items-center gap-2 p-2 bg-white shadow fixed top-0 left-0 right-0 z-50">
+  <div class="flex items-center bg-gray-200 rounded-full px-2 py-2 flex-1">
+      <img src="https://res.cloudinary.com/dfcceqba3/image/upload/v1768751916/58ea0e8c-876b-4d10-8409-0467943fd187_mpxtlr.jpg" class="w-7 h-7 mr-2">
+      <input placeholder="Search products" class="flex-1 bg-transparent outline-none text-sm">
+  </div>
+
+  <button class="p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#E02626" viewBox="0 0 24 24" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M21 8.25c0-2.485-2-4.5-4.5-4.5h0C14.216 3.75 12 5.744 12 8.25c0-2.506-2.216-4.5-4.5-4.5h0c-2.5 0-4.5 2.015-4.5 4.5 0 6.75 9 12 9 12s9-5.25 9-12z"/>
+      </svg>
+  </button>
+
+  <button class="p-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#E02626" viewBox="0 0 24 24" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0"/>
+      </svg>
+  </button>
+
+  <button class="p-2" onclick="openMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#E02626" viewBox="0 0 24 24" class="w-7 h-7">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"/>
+      </svg>
+  </button>
+</div>
+
+<div id="pageWrapper" class="fixed top-16 bottom-14 left-0 right-0 overflow-hidden">
+<div id="pages" class="flex w-[500%] h-full transition-transform duration-300">
+
+<div class="w-full h-full overflow-y-auto pb-24">
+
+<div class="p-3">
+  <div class="text-lg font-semibold text-brandRed">Welcome to Ellectra ⚡</div>
+  <p class="text-sm text-gray-600">Your ultimate electronics components store</p>
+</div>
+
+<div class="px-3 pt-1 mb-3">
+  <div class="flex justify-between items-center mb-2">
+      <h2 class="text-base font-semibold text-brandDark">Categories</h2>
+      <button onclick="location.href='product.html'" class="text-brandRed text-sm font-semibold">View All</button>
+  </div>
+
+  <div class="overflow-x-auto no-scrollbar">
+      <div class="flex gap-4 w-max">
+
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full bg-white shadow"></div>
+            <p class="text-xs mt-1 text-gray-700">Category</p>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+<div class="px-3 pt-1">
+  <div class="flex justify-between items-center mb-2">
+      <h2 class="text-base font-semibold text-brandDark">Our Products</h2>
+      <button onclick="location.href='product.html'" class="text-brandRed text-sm font-semibold">Click here to see more</button>
+  </div>
+
+  <div class="overflow-x-auto no-scrollbar">
+      <div class="flex gap-3 w-max">
+          <div class="w-36 h-32 rounded-xl shadow bg-white"></div>
+          <div class="w-36 h-32 rounded-xl shadow bg-white"></div>
+          <div class="w-36 h-32 rounded-xl shadow bg-white"></div>
+          <div class="w-36 h-32 rounded-xl shadow bg-white"></div>
+      </div>
+  </div>
+</div>
+
+<div class="px-3 pt-4">
+  <h2 class="text-base font-semibold text-brandDark mb-1">Customized Product</h2>
+  <p class="text-sm text-gray-600 mb-3">Make your idea into a product</p>
+  <div class="rounded-xl bg-white shadow p-3">
+      <div class="w-full rounded-lg overflow-hidden bg-black h-40"></div>
+      <p class="text-xs text-gray-500 mt-2">Cloudinary looping animation URL will be updated later</p>
+      <button onclick="location.href='ideation.html'"
+      class="w-full py-2 bg-brandRed text-white rounded-lg text-sm font-semibold shadow">
+      Make Idea Into Product — Click Here
+      </button>
+  </div>
+</div>
+
+</div>
+
+<div class="w-full h-full overflow-y-auto pb-24 flex items-center justify-center text-lg font-semibold">CATEGORY PAGE</div>
+<div class="w-full h-full overflow-y-auto pb-24 flex items-center justify-center text-lg font-semibold">CART PAGE</div>
+<div class="w-full h-full overflow-y-auto pb-24 flex items-center justify-center text-lg font-semibold">BLOG PAGE</div>
+<div class="w-full h-full overflow-y-auto pb-24 flex items-center justify-center text-lg font-semibold">PROJECT GPT PAGE</div>
+
+</div>
+</div>
+
+<div class="fixed bottom-0 left-0 right-0 bg-white border-t shadow-xl flex justify-around py-2 z-50">
+<button data-tab="0" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-600">
+<span class="material-symbols-rounded text-2xl">home</span>Home</button>
+<button data-tab="1" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-600">
+<span class="material-symbols-rounded text-2xl">category</span>Category</button>
+<button data-tab="2" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-600">
+<span class="material-symbols-rounded text-2xl">shopping_cart</span>Cart</button>
+<button data-tab="3" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-600">
+<span class="material-symbols-rounded text-2xl">article</span>Blog</button>
+<button data-tab="4" class="navBtn flex flex-col items-center gap-1 text-xs text-gray-600">
+<span class="material-symbols-rounded text-2xl">smart_toy</span>ProjectGPT</button>
+</div>
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+<div id="backdrop" class="fixed inset-0 opacity-0 pointer-events-none transition backdrop z-40"></div>
+
+<div id="sideMenu" class="drawer fixed top-0 right-0 h-full w-2/3 sm:w-1/2 bg-white shadow-2xl rounded-l-2xl transform translate-x-full z-50">
+  <div class="p-4 border-b flex justify-between items-center bg-brandRed text-white rounded-tl-2xl">
+      <span class="font-semibold text-lg">Menu</span>
+      <button onclick="closeMenu()" class="text-2xl leading-none">×</button>
+  </div>
+  <div id="profileSection" class="p-4"></div>
+</div>
+
+<script>
+const backdrop=document.getElementById('backdrop');
+const sideMenu=document.getElementById('sideMenu');
+const profileSection=document.getElementById('profileSection');
+
+backdrop.addEventListener('click',closeMenu);
+
+function openMenu(){
+ sideMenu.style.transform='translateX(0)';
+ backdrop.style.opacity='1';
+ backdrop.classList.remove('pointer-events-none');
+}
+
+function closeMenu(){
+ sideMenu.style.transform='translateX(100%)';
+ backdrop.style.opacity='0';
+ setTimeout(()=>backdrop.classList.add('pointer-events-none'),200);
+}
+
+const pages=document.getElementById("pages");
+const navBtns=document.querySelectorAll(".navBtn");
+let currentPage=0;
+
+function activate(i){
+ currentPage=i;
+ pages.style.transform=`translateX(-${i*100}%)`;
+ navBtns.forEach(b=>b.classList.remove("active"));
+ navBtns[i].classList.add("active");
+}
+
+navBtns.forEach(btn=>btn.onclick=()=>activate(+btn.dataset.tab));
+
+let sx=0;
+pages.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+pages.addEventListener("touchend",e=>{
+ let dx=e.changedTouches[0].clientX-sx;
+ if(Math.abs(dx)>50){
+   if(dx<0&&currentPage<4)activate(currentPage+1);
+   if(dx>0&&currentPage>0)activate(currentPage-1);
+ }
+});
+
+activate(0);
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,GoogleAuthProvider,signInWithPopup,signOut}from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import {getDatabase,ref,onValue,set,get} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyB1OpSI-breyPxE4mdBCOyQDvNm-QFNl-4",
+ authDomain:"ellectra-main-web.firebaseapp.com",
+ databaseURL:"https://ellectra-main-web-default-rtdb.firebaseio.com",
+ projectId:"ellectra-main-web",
+ storageBucket:"ellectra-main-web.firebasestorage.app",
+ messagingSenderId:"287792042028",
+ appId:"1:287792042028:web:5bf3108239ef89288bc189"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth();
+const provider=new GoogleAuthProvider();
+const db=getDatabase();
+
+function showLoggedOut(){
+ profileSection.innerHTML=`
+ <button id="signupBtn" class="bg-brandRed text-white px-4 py-2 rounded-lg w-full mb-2 shadow font-semibold">Sign Up with Google</button>
+ <button id="signinBtn" class="bg-brandYellow text-brandDark px-4 py-2 rounded-lg w-full shadow font-semibold">Sign In with Google</button>
+ `;
+ document.getElementById("signupBtn").onclick=async()=>{
+   const r=await signInWithPopup(auth,provider);
+   const u=r.user;
+   const userRef=ref(db,"users/"+u.uid);
+   const snap=await get(userRef);
+   if(!snap.exists()){
+     await set(userRef,{
+       displayName:u.displayName,
+       email:u.email,
+       contact:"",
+       address:""
+     });
+   }
+ };
+ document.getElementById("signinBtn").onclick=()=>signInWithPopup(auth,provider);
+}
+
+function showLoggedIn(user){
+ const userRef=ref(db,"users/"+user.uid);
+ profileSection.innerHTML=`
+ <div class="flex items-center gap-3 mb-4">
+   <img id="profImg" class="w-12 h-12 rounded-full shadow">
+   <div><p id="profName" class="font-semibold"></p><p id="profEmail" class="text-xs text-gray-600"></p></div>
+ </div>
+ <div class="mb-3">
+   <div class="flex justify-between items-center">
+     <p class="font-semibold text-sm">Contact Number</p><button onclick="editField('contact')" class="text-brandRed text-sm">✏</button>
+   </div><p id="profContact" class="text-sm text-gray-700"></p>
+ </div>
+ <div class="mb-3">
+   <div class="flex justify-between items-center">
+     <p class="font-semibold text-sm">Address</p><button onclick="editField('address')" class="text-brandRed text-sm">✏</button>
+   </div><p id="profAddress" class="text-sm text-gray-700"></p>
+ </div>
+ <button id="logoutBtn" class="mt-4 bg-brandRed text-white px-4 py-2 rounded-lg text-sm shadow">Logout</button>
+ `;
+ document.getElementById("profImg").src=user.photoURL;
+ document.getElementById("profName").innerText=user.displayName;
+ document.getElementById("profEmail").innerText=user.email;
+ onValue(userRef,s=>{
+   const d=s.val()||{};
+   document.getElementById("profContact").innerText=d.contact||"Not added";
+   document.getElementById("profAddress").innerText=d.address||"Not added";
+ });
+ document.getElementById("logoutBtn").onclick=()=>signOut(auth);
+}
+
+window.editField=function(field){
+ const v=prompt("Enter "+field+":");
+ if(!v||v.trim()=="")return;
+ set(ref(db,"users/"+auth.currentUser.uid+"/"+field),v.trim());
+}
+
+onAuthStateChanged(auth,u=>u?showLoggedIn(u):showLoggedOut());
+</script>
+
+</body>
+</html>
